@@ -84,6 +84,9 @@ public class TradeLogChangeService {
                         newLinesString.append(currentLine);
                         newLinesString.append("\n");
                     }
+                    if(currentLine.contains("gift offer")){
+                        newLinesString.append("You have received a gift offer.\n");
+                    }
                 }
             }
         } catch (FileNotFoundException e) {
