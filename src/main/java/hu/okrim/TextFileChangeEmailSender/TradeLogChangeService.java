@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 @Service
-public class TextFileChangeService {
+public class TradeLogChangeService {
     @Value("${target.file.filename}")
     private String examinedFileName;
     private static final String FILE_NAME = "text_history";
@@ -79,8 +79,11 @@ public class TextFileChangeService {
                 counter++;
                 String currentLine = scanner.nextLine();
                 if (counter > lastRowCount) {
-                    newLinesString.append(currentLine);
-                    newLinesString.append("\n");
+                    if(currentLine.split(":")[0].equals("Asked") ||
+                            currentLine.split(":")[0].equals("Offered")){
+                        newLinesString.append(currentLine);
+                        newLinesString.append("\n");
+                    }
                 }
             }
         } catch (FileNotFoundException e) {

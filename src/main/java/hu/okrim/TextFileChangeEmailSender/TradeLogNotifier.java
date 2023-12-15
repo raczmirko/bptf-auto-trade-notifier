@@ -6,14 +6,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TextFileChangeEmailSenderApplication implements CommandLineRunner {
+public class TradeLogNotifier implements CommandLineRunner {
 	@Autowired
 	private EmailSenderService senderService;
 	@Autowired
-	private TextFileChangeService textFileChangeService;
+	private TradeLogChangeService textFileChangeService;
 
 	public static void main(String[] args) {
-		SpringApplication.run(TextFileChangeEmailSenderApplication.class, args);
+		SpringApplication.run(TradeLogNotifier.class, args);
 	}
 	@Override
 	public void run(String... args) {
