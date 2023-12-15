@@ -69,7 +69,7 @@ public class TradeLogChangeService {
 
     String getNewLinesFromExaminedFile(String examinedTextFilePath){
         StringBuilder newLinesString = new StringBuilder();
-        newLinesString.append(String.format("These new lines have been added to the %s file:\n\n", examinedFileName));
+        newLinesString.append(String.format("The following items have been sold by your BPTF automatic agent, based on the %s file:\n\n", examinedFileName));
         int lastRowCount = getLastRowCountFromHistory();
         File examinedTextFile = new File(examinedTextFilePath);
 
@@ -89,7 +89,25 @@ public class TradeLogChangeService {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return newLinesString.toString();
+        return formatEmailBodyText(newLinesString.toString());
+    }
+
+    private String formatEmailBodyText(String string) {
+        StringBuilder formattedText = new StringBuilder();
+
+        // Split the input string by lines
+        String[] lines = string.split("\n");
+
+        for (String line : lines) {
+            // Append the current line to the formatted text
+            formattedText.append(line.trim());
+            if (line.split(":")[0].equals("Offered")) {
+                formattedText.append("\n---");
+            }
+            formattedText.append("\n");
+        }
+
+        return formattedText.toString();
     }
 
     int countRowsInExaminedFile(String examinedTextFilePath){
