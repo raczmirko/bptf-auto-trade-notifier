@@ -25,7 +25,7 @@ public class TextFileChangeEmailSenderApplication implements CommandLineRunner {
 			textFileChangeService.createHistoryFileIfNotExists();
 			if(textFileChangeService.changesOccurredInExaminedFile(examinedFilePath)){
 				String bodyText = textFileChangeService.getNewLinesFromExaminedFile(examinedFilePath);
-				senderService.sendMail(toEmail, "Test", bodyText);
+				senderService.sendMail(toEmail, "New TF2 items sold!", bodyText);
 				textFileChangeService.updateTextHistory(examinedFilePath);
 			}
 			else{
